@@ -42,19 +42,19 @@ export function formatDateTime(date: string | Date): string {
 export function getStatusColor(status: string): string {
   switch (status.toLowerCase()) {
     case 'pending':
-      return 'status-pending'
+      return 'bg-yellow-100 text-yellow-800'
     case 'approved':
-      return 'status-approved'
+      return 'bg-blue-100 text-blue-800'
     case 'delivered':
-      return 'status-delivered'
+      return 'bg-green-100 text-green-800'
     case 'completed':
-      return 'status-completed'
+      return 'bg-green-100 text-green-800'
     case 'paid':
-      return 'status-paid'
+      return 'bg-green-100 text-green-800'
     case 'cancelled':
-      return 'status-danger'
+      return 'bg-red-100 text-red-800'
     default:
-      return 'status-pending'
+      return 'bg-gray-100 text-gray-800'
   }
 }
 
