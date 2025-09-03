@@ -55,7 +55,7 @@ export default function Dashboard() {
       setLoading(true)
       
       // Fetch counts
-      const [clients, items, services, orders] = await Promise.all([
+      const [clients, items, services, ordersCount] = await Promise.all([
         supabase.from('clients').select('id', { count: 'exact' }),
         supabase.from('items').select('id', { count: 'exact' }),
         supabase.from('services').select('id', { count: 'exact' }),
@@ -85,7 +85,7 @@ export default function Dashboard() {
         totalClients: clients.count || 0,
         totalItems: items.count || 0,
         totalServices: services.count || 0,
-        totalOrders: orders.count || 0,
+        totalOrders: ordersCount.count || 0,
         totalRevenue: clientSummary?.reduce((sum, client) => sum + (client.total_revenue || 0), 0) || 0,
         outstandingBalance: clientSummary?.reduce((sum, client) => sum + (client.outstanding_balance || 0), 0) || 0
       })
