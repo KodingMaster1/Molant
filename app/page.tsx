@@ -68,7 +68,7 @@ export default function Dashboard() {
         .select('total_revenue, outstanding_balance')
 
       // Fetch recent orders
-      const { data: orders } = await supabase
+      const { data: ordersData, error: ordersError } = await supabase
         .from('orders')
         .select(`
           id,
@@ -90,10 +90,10 @@ export default function Dashboard() {
         outstandingBalance: clientSummary?.reduce((sum, client) => sum + (client.outstanding_balance || 0), 0) || 0
       })
 
-      if (orders.data) {
-        setRecentOrders(orders.data.map(order => ({
+      if (ordersData && !ordersError) {
+        setRecentOrders(ordersData.map(order => ({
           id: order.id,
-          client_name: order.clients.name,
+          client_name: order.clients?.[0]?.name || 'Unknown Client',
           type: order.type,
           total_amount: order.total_amount,
           status: order.status,
